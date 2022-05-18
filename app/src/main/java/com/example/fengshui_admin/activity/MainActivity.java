@@ -1,10 +1,13 @@
-package com.example.fengshui_admin;
+package com.example.fengshui_admin.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.fengshui_admin.R;
+
 import dagger.hilt.android.AndroidEntryPoint;
+import dagger.hilt.android.HiltAndroidApp;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
