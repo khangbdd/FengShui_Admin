@@ -1,17 +1,20 @@
-package com.example.aposs_buyer.model.dto
-
-import com.example.aposs_buyer.utils.OrderStatus
-import com.squareup.moshi.JsonClass
-import java.util.*
-import javax.annotation.Nullable
+package com.example.fengshui_admin.model.dto;
 
 
-data class OrderDTO(
-    var id: Long,
-    var orderTime: Date,
-    var orderStatus: OrderStatus,
-    var address: String,
-    var totalPrice: Int,
-    var cancelReason: String?,
-    var orderItemDTOList: List<OrderItemDTO>,
-)
+import com.example.fengshui_admin.utils.OrderStatus;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import lombok.Data;
+
+@Data
+class OrderDTO{
+    private Long id;
+    private Date orderTime;
+    private OrderStatus orderStatus;
+    private String address;
+    private int totalPrice;
+    private String cancelReason;
+    private ArrayList<OrderItemDTO> orderItemDTOList;
+}

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="order"
-            type="com.example.aposs_buyer.model.Order" />
+            type="com.example.fengshui_admin.model.Order" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

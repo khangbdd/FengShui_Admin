@@ -4,7 +4,7 @@
     <data>
         <variable
             name="billingItem"
-            type="com.example.aposs_buyer.model.OrderBillingItem" />
+            type="com.example.fengshui_admin.model.OrderBillingItem" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

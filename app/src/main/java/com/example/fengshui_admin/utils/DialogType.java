@@ -1,2 +1,5 @@
-package com.example.fengshui_admin.utils;public class DialogType {
+package com.example.fengshui_admin.utils;
+
+public enum DialogType {
+    CartDialog, CheckOutDialog
 }
