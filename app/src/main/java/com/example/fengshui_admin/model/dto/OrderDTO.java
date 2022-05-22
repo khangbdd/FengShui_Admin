@@ -9,6 +9,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
+public
 class OrderDTO{
     private Long id;
     private Date orderTime;
@@ -17,4 +18,17 @@ class OrderDTO{
     private int totalPrice;
     private String cancelReason;
     private ArrayList<OrderItemDTO> orderItemDTOList;
+
+    @Override
+    public String toString() {
+        return "OrderDTO{" +
+                "id=" + id +
+                ", orderTime=" + orderTime +
+                ", orderStatus=" + orderStatus +
+                ", address='" + address + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", cancelReason='" + cancelReason + '\'' +
+                ", orderItemDTOList=" + orderItemDTOList +
+                '}';
+    }
 }

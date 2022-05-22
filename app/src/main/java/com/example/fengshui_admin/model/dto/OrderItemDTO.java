@@ -10,4 +10,17 @@ import lombok.Data;
     private int price;
     private int quantity;
     private String property;
+
+    @Override
+    public String toString() {
+        return "OrderItemDTO{" +
+                "id=" + id +
+                ", product=" + product +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", property='" + property + '\'' +
+                '}';
+    }
 }
