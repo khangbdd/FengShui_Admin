@@ -14,6 +14,7 @@ import com.example.fengshui_admin.R;
 import com.example.fengshui_admin.databinding.ActivityMainBinding;
 import com.example.fengshui_admin.fragment.home_fragment.HomeFragment;
 import com.example.fengshui_admin.fragment.order_fragment.OrderFragment;
+import com.example.fengshui_admin.fragment.sign_in_fragment.SignInFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity{
         Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_manager);
         if (fragment == null){
             fragmentManager.beginTransaction()
-                    .add(R.id.fragment_manager, new OrderFragment())
+                    .add(R.id.fragment_manager, new SignInFragment())
                     .commit();
         }
     }

@@ -16,11 +16,13 @@ import io.reactivex.Observable;
 public class OrderRepository {
 
     @Inject
-    public OrderRepository(){}
+    public OrderRepository(){
+        orderService  =  RetrofitInstance.getInstance().retrofit.create(OrderService.class);
+    }
 
-    private OrderService orderService  =  RetrofitInstance.retrofit.create(OrderService.class);
+    private OrderService orderService;
 
-    public Observable<ArrayList<OrderDTO>> getAllOrderWithStatus(OrderStatus orderStatus){
-        return orderService.getAllOrderWithStatus(orderStatus);
+    public Observable<ArrayList<OrderDTO>> getAllOrderWithStatus(OrderStatus orderStatus, String accessToken){
+        return orderService.getAllOrderWithStatus(orderStatus, accessToken);
     }
 }

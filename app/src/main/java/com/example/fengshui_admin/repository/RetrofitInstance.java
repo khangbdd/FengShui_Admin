@@ -16,7 +16,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
-    public static Retrofit retrofit;
+    private static RetrofitInstance instance;
+
+    public Retrofit retrofit;
 
     private RetrofitInstance(){
 
@@ -27,5 +29,12 @@ public class RetrofitInstance {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
+    }
+
+    public static RetrofitInstance getInstance(){
+        if (instance == null){
+            instance = new RetrofitInstance();
+        }
+        return instance;
     }
 }

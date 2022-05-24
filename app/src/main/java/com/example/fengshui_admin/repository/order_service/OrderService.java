@@ -6,13 +6,17 @@ import com.example.fengshui_admin.utils.OrderStatus;
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface OrderService {
 
-    @GET("/order/all-order-by")
+    @GET("order/order-by-status")
     public Observable<ArrayList<OrderDTO>> getAllOrderWithStatus(
-            @Path("status") OrderStatus status
-    );
+            @Query("status") OrderStatus status,
+            @Header("Authorization")String accessToken
+            );
 }
