@@ -11,14 +11,14 @@ import com.example.fengshui_admin.model.entity.Account;
 public interface AccountDAO {
 
     @Insert
-    public void insertAccount(Account account);
+    void insertAccount(Account account);
 
     @Delete
-    public void deleteAccount(Account account);
+    void deleteAccount(Account account);
 
     @Query("UPDATE account SET accessToken = :accessToken")
-    public void updateAccessToken(String accessToken);
+    void updateAccessToken(String accessToken);
 
     @Query("SELECT * FROM account Limit 1")
-    public Account getAccount();
+    Account getAccount();
 }

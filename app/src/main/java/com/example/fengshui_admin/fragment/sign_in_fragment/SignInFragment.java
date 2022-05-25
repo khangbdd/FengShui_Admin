@@ -87,10 +87,9 @@ public class SignInFragment extends Fragment {
                             viewModel.token.getTokenType(),
                             viewModel.token.getRefreshToken()
                             );
-                    AccountDatabase.getInstance(this.requireContext()).accountDao.insertAccount(
+                    AccountDatabase.getInstance(this.requireContext()).accountDao().insertAccount(
                             account
                     );
-                    Log.d("0000000000000000", viewModel.token.getAccessToken());
                     navigateTo(new OrderFragment());
                 } else {
                     Toast.makeText(this.getContext(), "An error occur!", Toast.LENGTH_SHORT).show();

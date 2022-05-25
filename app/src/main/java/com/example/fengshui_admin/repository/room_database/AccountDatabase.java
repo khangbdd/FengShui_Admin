@@ -13,7 +13,7 @@ import kotlin.jvm.Volatile;
 
 @Database(entities = Account.class, version = 2, exportSchema = false)
 public abstract class AccountDatabase extends RoomDatabase {
-    public AccountDAO accountDao;
+    public abstract AccountDAO accountDao();
     @Volatile
     private static AccountDatabase INSTANCE = null;
     private static final String DATABASE_NAME = "account.db";

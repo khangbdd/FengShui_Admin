@@ -69,7 +69,7 @@ public class OrderFragment extends Fragment {
     }
 
     private void loadToken(){
-        Account account = AccountDatabase.getInstance(this.requireContext()).accountDao.getAccount();
+        Account account = AccountDatabase.getInstance(this.requireContext()).accountDao().getAccount();
         orderViewModel.loadToken(new TokenDTO(
                 account.accessToken, account.tokenType, account.refreshToken
         ));

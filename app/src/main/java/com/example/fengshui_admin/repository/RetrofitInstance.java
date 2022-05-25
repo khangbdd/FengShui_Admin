@@ -23,9 +23,10 @@ public class RetrofitInstance {
     private RetrofitInstance(){
 
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new MyInterceptor()).build();
-
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         retrofit = new Retrofit.Builder().baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build();
@@ -37,4 +38,5 @@ public class RetrofitInstance {
         }
         return instance;
     }
+
 }

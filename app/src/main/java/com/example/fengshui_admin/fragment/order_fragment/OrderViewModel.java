@@ -1,6 +1,7 @@
 package com.example.fengshui_admin.fragment.order_fragment;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -42,7 +43,7 @@ public class OrderViewModel extends ViewModel {
 
     @SuppressLint("CheckResult")
     private void loadTestOrder(){
-        orderRepository.getAllOrderWithStatus(OrderStatus.Pending, token.getAccessToken())
+        orderRepository.getAllOrderWithStatus(OrderStatus.Pending, token.getTokenType()+" "+token.getAccessToken())
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(new Observer<ArrayList<OrderDTO>>(){

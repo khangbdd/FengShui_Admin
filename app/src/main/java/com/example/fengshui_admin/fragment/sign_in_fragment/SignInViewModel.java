@@ -59,7 +59,6 @@ public class SignInViewModel extends ViewModel {
     }
 
     public void onLoginClick() {
-        Log.d("0000000000000", email.getValue().toString() + password.getValue().toString());
         if (email.getValue() != null && password.getValue() != null) {
             if (isValidEmail() && isValidPassword()) {
                 signIn(email.getValue(), password.getValue());
@@ -86,7 +85,6 @@ public class SignInViewModel extends ViewModel {
                     @Override
                     public void onNext(TokenDTO tokenDTO) {
                         token = tokenDTO;
-                        Log.d("00000000000000001", token.getAccessToken());
                         loginState.postValue(LoginState.Success);
                         toastMessage.setValue( "Login success");
                     }
