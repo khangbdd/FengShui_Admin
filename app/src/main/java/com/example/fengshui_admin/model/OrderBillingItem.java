@@ -13,6 +13,16 @@ public class OrderBillingItem {
     private int amount;
     private String property;
 
+    public OrderBillingItem(Long id, Long product, Image image, String name, int price, int amount, String property) {
+        this.id = id;
+        this.product = product;
+        this.image = image;
+        this.name = name;
+        this.price = price;
+        this.amount = amount;
+        this.property = property;
+    }
+
     public String priceToString(){
         DecimalFormat formatter = new DecimalFormat("#,###");
         String formattedNumber = formatter.format(price);

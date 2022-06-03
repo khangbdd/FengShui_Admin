@@ -18,6 +18,15 @@ public class Order  {
     private int totalPrice;
     private String cancelReason  ="";
 
+    public Order(Long id, Date orderTime, OrderStatus status, String address, ArrayList<OrderBillingItem> billingItems, int totalPrice) {
+        this.id = id;
+        this.orderTime = orderTime;
+        this.status = status;
+        this.address = address;
+        this.billingItems = billingItems;
+        this.totalPrice = totalPrice;
+    }
+
     public String totalPriceToString(){
         DecimalFormat formatter = new DecimalFormat("#,###");
         String formattedNumber  = formatter.format(totalPrice);

@@ -1,18 +1,25 @@
 package com.example.fengshui_admin.fragment.order_fragment;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.fengshui_admin.model.Image;
+import com.example.fengshui_admin.model.Order;
+import com.example.fengshui_admin.model.OrderBillingItem;
 import com.example.fengshui_admin.model.dto.OrderDTO;
+import com.example.fengshui_admin.model.dto.OrderItemDTO;
 import com.example.fengshui_admin.model.dto.TokenDTO;
 import com.example.fengshui_admin.repository.order_service.OrderRepository;
 import com.example.fengshui_admin.repository.room_database.AccountDatabase;
 import com.example.fengshui_admin.utils.OrderStatus;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -27,8 +34,10 @@ import io.reactivex.schedulers.Schedulers;
 @HiltViewModel
 public class OrderViewModel extends ViewModel {
     public TokenDTO token = null;
+    public MutableLiveData<ArrayList<Order>> lstDisplay = new MutableLiveData<>();
     @Inject
     public OrderViewModel(OrderRepository orderRepository) {
+        lstDisplay.setValue(new ArrayList<>());
         this.orderRepository = orderRepository;
     }
 
@@ -52,9 +61,16 @@ public class OrderViewModel extends ViewModel {
 
                             }
 
+                            @RequiresApi(api = Build.VERSION_CODES.N)
                             @Override
                             public void onNext(ArrayList<OrderDTO> orderDTOS) {
                                     lstOrder.setValue(orderDTOS);
+                                    ArrayList<Order> listAttempt = new ArrayList<>();
+                                    lstOrder.getValue().stream().forEach(orderDTO ->
+                                    {
+                                        listAttempt.add(convertToOrder(orderDTO));
+                                    });
+                                lstDisplay.setValue(listAttempt);
                             }
 
                             @Override
@@ -68,6 +84,34 @@ public class OrderViewModel extends ViewModel {
 
                             }
                         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private Order convertToOrder(OrderDTO orderDTO)
+    {
+        return new Order(
+                orderDTO.getId(),
+                orderDTO.getOrderTime(),
+                orderDTO.getOrderStatus(),
+                orderDTO.getAddress(),
+                new ArrayList(orderDTO.getOrderItemDTOList().stream().map(orderItemDTO -> {
+                    return convertToOrderItem(orderItemDTO);
+                }).collect(Collectors.toList())),
+                orderDTO.getTotalPrice()
+        );
+    }
+
+    private OrderBillingItem convertToOrderItem(OrderItemDTO orderItemDTO)
+    {
+        return new OrderBillingItem(
+                orderItemDTO.getId(),
+                orderItemDTO.getProduct(),
+                new Image(orderItemDTO.getImageUrl()),
+                orderItemDTO.getName(),
+                orderItemDTO.getPrice(),
+                orderItemDTO.getQuantity(),
+                orderItemDTO.getProperty()
+        );
     }
 
 }

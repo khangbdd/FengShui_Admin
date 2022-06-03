@@ -20,6 +20,7 @@ import com.example.fengshui_admin.R;
 import com.example.fengshui_admin.activity.MainActivity;
 import com.example.fengshui_admin.databinding.FragmentSignInBinding;
 import com.example.fengshui_admin.dialog.LoadingDialog;
+import com.example.fengshui_admin.fragment.home_fragment.HomeFragment;
 import com.example.fengshui_admin.fragment.order_fragment.OrderFragment;
 import com.example.fengshui_admin.fragment.order_fragment.OrderViewModel;
 import com.example.fengshui_admin.model.dto.SignInDTO;
@@ -78,7 +79,9 @@ public class SignInFragment extends Fragment {
             if (it == LoginState.Loading) {
                 dialog.startLoading();
             } else {
-                dialog.dismissDialog();
+                if(dialog != null) {
+                    dialog.dismissDialog();
+                }
                 if (viewModel.token != null && viewModel.email.getValue() != null && viewModel.password.getValue() != null) {
                     Account account = new Account(
                                     viewModel.email.getValue(),
@@ -90,7 +93,7 @@ public class SignInFragment extends Fragment {
                     AccountDatabase.getInstance(this.requireContext()).accountDao().insertAccount(
                             account
                     );
-                    navigateTo(new OrderFragment());
+                    navigateTo(new HomeFragment());
                 } else {
                     Toast.makeText(this.getContext(), "An error occur!", Toast.LENGTH_SHORT).show();
                 }

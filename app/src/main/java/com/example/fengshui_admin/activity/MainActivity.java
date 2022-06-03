@@ -15,6 +15,8 @@ import com.example.fengshui_admin.databinding.ActivityMainBinding;
 import com.example.fengshui_admin.fragment.home_fragment.HomeFragment;
 import com.example.fengshui_admin.fragment.order_fragment.OrderFragment;
 import com.example.fengshui_admin.fragment.sign_in_fragment.SignInFragment;
+import com.example.fengshui_admin.repository.room_database.AccountDatabase;
+import com.example.fengshui_admin.repository.room_database.dao.AccountDAO;
 import com.google.android.material.navigation.NavigationView;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -74,8 +76,9 @@ public class MainActivity extends AppCompatActivity{
                 return true;
             }
             case R.id.logout: {
-                System.out.println("nav to logout");
-                navigateTo(null);
+                AccountDAO accountDAO = AccountDatabase.getInstance(this.getBaseContext()).accountDao();
+                accountDAO.deleteAccount(accountDAO.getAccount());
+                navigateTo(new SignInFragment());
                 binding.drawerLayout.closeDrawer(Gravity.LEFT);
                 return true;
             }
@@ -91,10 +94,17 @@ public class MainActivity extends AppCompatActivity{
 
     private void setUpFirstFragment(){
         Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_manager);
+        AccountDAO accountDAO = AccountDatabase.getInstance(this.getBaseContext()).accountDao();
         if (fragment == null){
-            fragmentManager.beginTransaction()
-                    .add(R.id.fragment_manager, new SignInFragment())
-                    .commit();
+            if (accountDAO.getAccount() == null) {
+                fragmentManager.beginTransaction()
+                        .add(R.id.fragment_manager, new SignInFragment())
+                        .commit();
+            } else {
+                fragmentManager.beginTransaction()
+                        .add(R.id.fragment_manager, new HomeFragment())
+                        .commit();
+            }
         }
     }
 }

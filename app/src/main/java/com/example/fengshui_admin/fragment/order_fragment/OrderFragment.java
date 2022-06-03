@@ -1,5 +1,6 @@
 package com.example.fengshui_admin.fragment.order_fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,13 +11,17 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fengshui_admin.R;
+import com.example.fengshui_admin.adapter.OrderAdapter;
 import com.example.fengshui_admin.databinding.FragmentOrderBinding;
+import com.example.fengshui_admin.model.Order;
 import com.example.fengshui_admin.model.dto.OrderDTO;
 import com.example.fengshui_admin.model.dto.TokenDTO;
 import com.example.fengshui_admin.model.entity.Account;
@@ -32,6 +37,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class OrderFragment extends Fragment {
 
     OrderViewModel orderViewModel;
+    OrderAdapter orderAdapter;
 
 
     private FragmentOrderBinding binding;
@@ -52,17 +58,29 @@ public class OrderFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order, container, false);
         orderViewModel = new ViewModelProvider(requireActivity()).get(OrderViewModel.class);
+        binding.setViewModel(orderViewModel);
         loadToken();
-        orderViewModel.lstOrder.observe(this.getViewLifecycleOwner(), new Observer<ArrayList<OrderDTO>>() {
+        orderAdapter = new OrderAdapter(new OrderAdapter.OnClickListener() {
+            @Override
+            public void onClick(Order order) {
+
+            }
+        });
+        binding.orders.setAdapter(orderAdapter);
+        binding.orders.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
+        orderViewModel.lstDisplay.observe(getViewLifecycleOwner(), new Observer<ArrayList<Order>>() {
+            @SuppressLint("NotifyDataSetChanged")
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
-            public void onChanged(ArrayList<OrderDTO> orderDTOS) {
-                StringBuilder stringBuilder = new StringBuilder();
-                orderDTOS.stream().forEach( orderDTO -> {
-                            stringBuilder.append(orderDTO.toString());
+            public void onChanged(ArrayList<Order> orders) {
+                orders.stream().forEach(
+                        order -> {
+                            Log.d("orders: ", order.toString());
                         }
                 );
-                binding.testText.setText(stringBuilder);
+                orderAdapter.submitList(null);
+                orderAdapter.submitList(new ArrayList<>(orders));
+                Log.d("0000000000000", String.valueOf(orderAdapter.getItemCount()));
             }
         });
         return binding.getRoot();
