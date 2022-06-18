@@ -21,7 +21,7 @@ import java.util.Objects;
 public class BillingItemsAdapter extends ListAdapter<OrderBillingItem, BillingItemsAdapter.BillingItemViewHolder> {
 
 
-    protected BillingItemsAdapter() {
+    public BillingItemsAdapter() {
         super(DiffCallBack.getInstance());
     }
 

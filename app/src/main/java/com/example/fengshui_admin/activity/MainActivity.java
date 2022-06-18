@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity{
 
     private void navigateTo(Fragment desFragment){
             fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_manager, desFragment)
+                    .add(R.id.fragment_manager, desFragment)
                     .commit();
     }
 

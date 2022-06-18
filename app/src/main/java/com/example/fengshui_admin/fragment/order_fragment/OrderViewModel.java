@@ -2,6 +2,7 @@ package com.example.fengshui_admin.fragment.order_fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
+import android.security.AppUriAuthenticationPolicy;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
@@ -44,15 +45,17 @@ public class OrderViewModel extends ViewModel {
     public void loadToken(TokenDTO token)
     {
         this.token =token;
-        loadTestOrder();
+        loadOrder(OrderStatus.Pending);
     }
 
     public MutableLiveData<ArrayList<OrderDTO>> lstOrder = new MutableLiveData<>();
     private final OrderRepository orderRepository;
 
     @SuppressLint("CheckResult")
-    private void loadTestOrder(){
-        orderRepository.getAllOrderWithStatus(OrderStatus.Pending, token.getTokenType()+" "+token.getAccessToken())
+    public void loadOrder(OrderStatus orderStatus){
+        lstDisplay.setValue(new ArrayList<>());
+        lstOrder.setValue(new ArrayList<>());
+        orderRepository.getAllOrderWithStatus(orderStatus, token.getTokenType()+" "+token.getAccessToken())
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(new Observer<ArrayList<OrderDTO>>(){
@@ -84,6 +87,43 @@ public class OrderViewModel extends ViewModel {
 
                             }
                         });
+    }
+
+
+    @SuppressLint("CheckResult")
+    public void setOrderStatus(long id, OrderStatus orderStatus)
+    {
+        orderRepository.setOrderStatus(id, orderStatus, token.getTokenType()+" "+token.getAccessToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        Log.d("ChangeOrderStatus: ", s);
+                        if (orderStatus == OrderStatus.Confirmed) {
+                            loadOrder(OrderStatus.Pending);
+                        }
+                        if (orderStatus == OrderStatus.Delivering) {
+                            loadOrder(OrderStatus.Confirmed);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        System.out.println(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
