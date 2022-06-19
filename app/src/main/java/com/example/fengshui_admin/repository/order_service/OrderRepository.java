@@ -25,4 +25,8 @@ public class OrderRepository {
     public Observable<ArrayList<OrderDTO>> getAllOrderWithStatus(OrderStatus orderStatus, String accessToken){
         return orderService.getAllOrderWithStatus(orderStatus, accessToken);
     }
+
+    public Observable<String> setOrderStatus(Long id, OrderStatus orderStatus, String accessToken){
+        return orderService.setOrderStatus(id, orderStatus, accessToken);
+    }
 }

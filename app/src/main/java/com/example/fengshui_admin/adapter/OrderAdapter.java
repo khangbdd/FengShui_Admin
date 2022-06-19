@@ -15,16 +15,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fengshui_admin.databinding.ItemOrderBinding;
 import com.example.fengshui_admin.model.Order;
 import com.example.fengshui_admin.model.OrderBillingItem;
+import com.example.fengshui_admin.utils.OrderStatus;
 
 import java.util.Objects;
 
 public class OrderAdapter extends ListAdapter<Order, OrderAdapter.OrderViewHolder> {
 
         private OnClickListener onClickListener;
+        private OnChangeStatusClick onChangeStatusClick;
 
-    public OrderAdapter(OnClickListener onClickListener) {
+        public interface OnChangeStatusClick{
+            void onChangeStatusClick(long orderId, OrderStatus orderStatus);
+        }
+
+    public OrderAdapter(OnClickListener onClickListener, OnChangeStatusClick onChangeStatusClick) {
         super(DiffCallBack.getInstance());
         this.onClickListener = onClickListener;
+        this.onChangeStatusClick = onChangeStatusClick;
     }
     public static class DiffCallBack extends DiffUtil.ItemCallback<Order>{
 
@@ -52,7 +59,7 @@ public class OrderAdapter extends ListAdapter<Order, OrderAdapter.OrderViewHolde
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new OrderViewHolder(ItemOrderBinding.inflate(LayoutInflater.from(parent.getContext())));
+        return new OrderViewHolder(ItemOrderBinding.inflate(LayoutInflater.from(parent.getContext())), onChangeStatusClick);
     }
 
     @Override
@@ -74,16 +81,41 @@ public class OrderAdapter extends ListAdapter<Order, OrderAdapter.OrderViewHolde
         public class OrderViewHolder extends RecyclerView.ViewHolder {
 
             public ItemOrderBinding binding;
+            public OnChangeStatusClick onChangeStatusClick;
 
-            public OrderViewHolder(ItemOrderBinding binding){
+            public OrderViewHolder(ItemOrderBinding binding, OnChangeStatusClick onChangeStatusClick){
                 super(binding.getRoot());
                 this.binding = binding;
+                this.onChangeStatusClick = onChangeStatusClick;
             }
 
             public void bind(Order order) {
                 binding.setOrder(order);
                 BillingItemsAdapter adapter = new BillingItemsAdapter();
                 binding.billingItems.setAdapter(adapter);
+                if (order.getStatus() == OrderStatus.Pending) {
+                    binding.ratingNow.setVisibility(View.VISIBLE);
+                    binding.ratingNow.setText("Confirm");
+                } else if (order.getStatus() == OrderStatus.Confirmed) {
+                    binding.ratingNow.setVisibility(View.VISIBLE);
+                    binding.ratingNow.setText("Delivered");
+                } else if (order.getStatus() == OrderStatus.Delivering) {
+                    binding.ratingNow.setVisibility(View.GONE);
+                } else if (order.getStatus() == OrderStatus.Success) {
+                    binding.ratingNow.setVisibility(View.GONE);
+                } else if (order.getStatus() == OrderStatus.Cancel) {
+                    binding.ratingNow.setVisibility(View.GONE);
+                }
+                binding.ratingNow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (order.getStatus() == OrderStatus.Pending) {
+                            onChangeStatusClick.onChangeStatusClick(order.getId(), OrderStatus.Confirmed);
+                        } else if (order.getStatus() == OrderStatus.Confirmed) {
+                            onChangeStatusClick.onChangeStatusClick(order.getId(), OrderStatus.Delivering);
+                        }
+                    }
+                });
             }
 
         }
