@@ -3,6 +3,32 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable-v24/bg_apart_of_kind_item_2.xml" value="0.168" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable-v24/bg_btn_cancel.xml" value="0.168" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable-v24/bg_btn_filter.xml" value="0.168" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable-v24/bg_btn_received.xml" value="0.168" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable-v24/bg_btn_save.xml" value="0.168" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable-v24/bg_search.xml" value="0.215" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.168" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable-v24/ic_order_pass.xml" value="0.168" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable-v24/ic_right_cycle.xml" value="0.168" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable/ic_home_box.xml" value="0.3015" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable/ic_home_box_active.xml" value="0.209" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable/ic_home_button.xml" value="0.3015" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable/ic_home_filter.xml" value="0.168" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable/ic_home_filter_active.xml" value="0.209" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable/ic_home_filter_button.xml" value="0.209" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable/ic_home_product.xml" value="0.168" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable/ic_home_product_active.xml" value="0.209" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable/ic_home_product_button.xml" value="0.1" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/drawable/ic_launcher_background.xml" value="0.168" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/layout/activity_main.xml" value="0.5504840940525588" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/layout/dialog_loading.xml" value="0.1802536231884058" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/layout/fragment_home.xml" value="0.22777777777777777" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/layout/fragment_home_product.xml" value="0.18885869565217392" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/layout/fragment_order.xml" value="0.22" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/layout/item_order.xml" value="0.25" />
+        <entry key="..\:/DoAn/DiDong/FengShui_Admin/app/src/main/res/layout/item_order_billing.xml" value="0.25" />
         <entry key="..\:/FengShui_Admin/app/src/main/res/drawable-v24/bg_rating_now_button.xml" value="0.1" />
         <entry key="..\:/FengShui_Admin/app/src/main/res/drawable-v24/ic_order_pending.xml" value="0.1" />
         <entry key="..\:/FengShui_Admin/app/src/main/res/layout/activity_main.xml" value="0.1" />
