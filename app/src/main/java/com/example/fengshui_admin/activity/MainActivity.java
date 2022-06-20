@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity{
             }
             case R.id.industry: {
                 System.out.println("nav to industry");
-                navigateTo(null);
-                binding.drawerLayout.closeDrawer(Gravity.LEFT);
+//                navigateTo(null);
+//                binding.drawerLayout.closeDrawer(Gravity.LEFT);
                 return true;
             }
             case R.id.logout: {
