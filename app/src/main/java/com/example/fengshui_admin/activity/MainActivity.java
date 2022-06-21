@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 

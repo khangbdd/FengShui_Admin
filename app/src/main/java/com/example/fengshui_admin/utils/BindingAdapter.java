@@ -13,8 +13,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.fengshui_admin.R;
 import com.example.fengshui_admin.adapter.BillingItemsAdapter;
 import com.example.fengshui_admin.adapter.OrderAdapter;
+import com.example.fengshui_admin.adapter.ProductItemsAdapter;
 import com.example.fengshui_admin.model.Order;
 import com.example.fengshui_admin.model.OrderBillingItem;
+import com.example.fengshui_admin.model.Product;
 
 import java.util.ArrayList;
 
@@ -70,5 +72,12 @@ public class BindingAdapter {
         OrderAdapter adapter = (OrderAdapter)recyclerView.getAdapter() ;
         assert adapter != null;
         adapter.submitList(orders);
+    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @androidx.databinding.BindingAdapter("productData")
+    public static void bindProductRecyclerView(RecyclerView recyclerView, ArrayList<Product> products){
+        ProductItemsAdapter adapter = (ProductItemsAdapter)recyclerView.getAdapter() ;
+        assert adapter != null;
+        adapter.submitList(products);
     }
 }
